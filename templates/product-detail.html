@@ -44,7 +44,7 @@
                         <i class="fa fa-star"></i>
 
                     </div>
-                    <h3 class="font-weight-semi-bold mb-4">Rs{{products.discounted_price}}</h3>
+                    <h3 class="font-weight-semi-bold mb-4">Rs {{products.discounted_price}}</h3>
                     <div class="d-flex mb-3">
                         <strong class="text-dark mr-3">Sizes:</strong>
                         <form>
@@ -109,8 +109,9 @@
                                 </button>
                             </div>
                         </div>
+                        <a class="btn" href="/add_to_cart/{{products.slug}}">
                         <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To
-                            Cart</button>
+                            Cart</button></a>
                     </div>
                     <div class="d-flex pt-2">
                         <strong class="text-dark mr-2">Share on:</strong>
@@ -231,8 +232,8 @@
                         <div class="product-img position-relative overflow-hidden">
                             <img class="img-fluid w-100" src="{{products.image.url}}" alt="">
                             <div class="product-action">
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
+                                <a class="btn btn-outline-dark btn-square" href="/add_to_cart/{{products.slug}}"><i class="fa fa-shopping-cart"></i></a>
+                                <a class="btn btn-outline-dark btn-square" href="/add_to_wishlist/{{products.slug}}"><i class="far fa-heart"></i></a>
                                 <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
                                 <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
                             </div>
@@ -240,7 +241,7 @@
                         <div class="text-center py-4">
                             <a class="h6 text-decoration-none text-truncate" href="">{{products.name}}</a>
                             <div class="d-flex align-items-center justify-content-center mt-2">
-                                <h5>{{products.discounted_price}}</h5><h6 class="text-muted ml-2"><del>{{products.price}}</del></h6>
+                                <h5>Rs {{products.discounted_price}}</h5><h6 class="text-muted ml-2"><del>Rs {{products.price}}</del></h6>
                             </div>
                             <div class="d-flex align-items-center justify-content-center mb-1">
                                 <small class="fa fa-star text-primary mr-1"></small>

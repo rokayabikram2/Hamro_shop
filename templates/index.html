@@ -37,7 +37,7 @@
                     <div class="offer-text">
                         <h6 class="text-white text-uppercase">{{ad.description}}</h6>
                         <h3 class="text-white mb-3">{{ad.name}}</h3>
-                        <a href="" class="btn btn-primary">Shop Now</a>
+                        <a href="/add_to_cart" class="btn btn-primary">Shop Now</a>
                     </div>
                 </div>
                 {% endif %}
@@ -47,7 +47,7 @@
                     <div class="offer-text">
                         <h6 class="text-white text-uppercase">{{ad.description}}</h6>
                         <h3 class="text-white mb-3">{{ad.name}}</h3>
-                        <a href="" class="btn btn-primary">Shop Now</a>
+                        <a href="/add_to_cart" class="btn btn-primary">Shop Now</a>
                     </div>
                 </div>
                 {% endif %}
@@ -126,8 +126,8 @@
                     <div class="product-img position-relative overflow-hidden">
                         <img class="img-fluid w-100" src="{{hot.image.url}}" alt="">
                         <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
+                            <a class="btn btn-outline-dark btn-square" href="/add_to_cart/{{hot.slug}}"><i class="fa fa-shopping-cart"></i></a>
+                            <a class="btn btn-outline-dark btn-square" href="/add_to_wishlist/{{hot.slug}}"><i class="far fa-heart"></i></a>
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
                         </div>
@@ -199,8 +199,8 @@
                     <div class="product-img position-relative overflow-hidden">
                         <img class="img-fluid w-100" src="{{new.image.url}}" alt="">
                         <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
+                            <a class="btn btn-outline-dark btn-square" href="/add_to_cart/{{new.slug}}"><i class="fa fa-shopping-cart"></i></a>
+                            <a class="btn btn-outline-dark btn-square" href="/add_to_wishlist/{{new.slug}}"><i class="far fa-heart"></i></a>
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
                         </div>

@@ -13,4 +13,6 @@ admin.site.register(Product)
 admin.site.register(ProductImage)
 admin.site.register(ProductReview)
 admin.site.register(Cart)
+admin.site.register(Wishlist)
+
 
