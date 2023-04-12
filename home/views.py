@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.views.generic import View
 from .models import *
 from django.contrib import messages
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -15,6 +16,7 @@ class HomeView(BaseView):
     def get(self, request):
         self.views
         self.views['cart_counts '] = count_cart(request)
+        self.views['wish_counts'] = count_wish(request)
         self.views['subcategories'] = Subcategory.objects.all()
         self.views['sliders'] = Slider.objects.all()
         self.views['ads'] = Ad.objects.all()
@@ -47,6 +49,7 @@ def contact(request):
 class ProductView(BaseView):
     def get(self, request, slug):
         self.views['cart_counts '] = count_cart(request)
+        self.views['wish_counts'] = count_wish(request)
         self.views['product_detail'] = Product.objects.filter(slug=slug)
         self.views['product_review'] = ProductReview.objects.filter(slug=slug)
         subcat_id = Product.objects.get(slug = slug).subcategory_id
@@ -92,6 +95,7 @@ class Shop(BaseView):
 class CartView(BaseView):
     def get(self,request):
         self.views['cart_counts'] = count_cart(request)
+        self.views['wish_counts'] = count_wish(request)
         username = request.user.username
         self.views['cart_view'] = Cart.objects.filter(username =username)
 
@@ -181,7 +185,7 @@ def count_cart(request):
 
 class WishlistView(BaseView):
     def get(self,request):
-        self.views['cart_counts']=count_cart(request)
+        self.views['cart_counts'] = count_cart(request)
         self.views['wish_counts'] = count_wish(request)
         username= request.user.username
         self.views['wish_view'] = Wishlist.objects.filter(username=username)
@@ -213,10 +217,43 @@ def delete_wish(request, slug):
     if Product.objects.filter(slug=slug).exists():
         if Wishlist.objects.filter(slug=slug, username=username).exists():
             Wishlist.objects.filter(slug=slug, username=username).delete()
-    return redirect('/wish')
+    return redirect('/wishlist')
 
 
 def count_wish(request):
     username = request.user.username
     wish_count = Wishlist.objects.filter(username=username).count()
     return wish_count
+
+
+def signup(request):
+    if request.method == "POST":
+        first_name = request.POST['f_name']
+        last_name = request.POST['l_name']
+        username = request.POST['username']
+        email = request.POST['email']
+        password = request.POST['password']
+        cpassword = request.POST['cpassword']
+
+        if password == cpassword:
+            if User.objects.filter(username=username).exists():
+                messages.error(request,'The username is already taken.')
+                return redirect('/signup')
+
+            elif User.objects.filter(email=email).exists():
+                messages.error(request,'The email is already used.')
+                return redirect('/signup')
+
+            else:
+                data = User.objects.create(
+                    first_name=first_name,
+                    last_name=last_name,
+                    email=email,
+                    username=username,
+                    password=password
+                )
+                data.save()
+
+        else:
+            messages.error(request, 'The password does not match.')
+    return render(request, 'signup.html')
