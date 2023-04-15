@@ -4,7 +4,6 @@ from .views import *
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('', HomeView.as_view(), name='home'),
     path('contact', contact, name='contact'),
     path('ProductView/<slug>', ProductView.as_view(), name='ProductView'),
@@ -19,7 +18,7 @@ urlpatterns = [
     path('add_to_wishlist/<slug>', add_to_wishlist, name='add_to_wishlist'),
     path('delete_wish/<slug>', delete_wish, name='delete_wish'),
     path('count_wish/<slug>', count_wish, name='count_wish'),
-    path('signup', signup, name='signup')
-
+    path('signup', signup, name='signup'),
+    path('checkout', checkoutView, name='checkout')
 
 ]

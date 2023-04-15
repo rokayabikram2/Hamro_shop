@@ -14,11 +14,11 @@
                     </ol>
                     <div class="carousel-inner">
                         {% for slider in sliders %}
-                        <div class="carousel-item position-relative {% if forloop.counter0 == 0 %}active{% endif %}" style="height: 430px;">
+                        <div class="carousel-item position-relative {% if forloop.counter0 == 0 %}active{% endif %}" style="height:430px;">
                             <img class="position-absolute w-100 h-100" src="{{slider.image.url}}" style="object-fit: cover;">
                             <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                                <div class="p-3" style="max-width:700px;">
-                                    <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Men Fashion</h1>
+                                <div class="p-3" style="max-width:900px;">
+                                    <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown"></h1>
                                     <p>{{slider.description}}</p>
                                     <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="{{slider.url}}">Shop Now</a>
                                 </div>
@@ -36,8 +36,8 @@
                     <img class="img-fluid" src="{{ad.image.url}}" alt="">
                     <div class="offer-text">
                         <h6 class="text-white text-uppercase">{{ad.description}}</h6>
-                        <h3 class="text-white mb-3">{{ad.name}}</h3>
-                        <a href="/add_to_cart" class="btn btn-primary">Shop Now</a>
+<!--                        <h3 class="text-white mb-3">{{ad.name}}</h3>-->
+                        <a href="https://www.daraz.com.np/" class="btn btn-primary">Shop Now</a>
                     </div>
                 </div>
                 {% endif %}
@@ -46,8 +46,8 @@
                     <img class="img-fluid" src="{{ad.image.url}}" alt="">
                     <div class="offer-text">
                         <h6 class="text-white text-uppercase">{{ad.description}}</h6>
-                        <h3 class="text-white mb-3">{{ad.name}}</h3>
-                        <a href="/add_to_cart" class="btn btn-primary">Shop Now</a>
+<!--                        <h3 class="text-white mb-3">{{ad.name}}</h3>-->
+                        <a href="https://www.daraz.com.np/" class="btn btn-primary">Shop Now</a>
                     </div>
                 </div>
                 {% endif %}
@@ -129,7 +129,7 @@
                             <a class="btn btn-outline-dark btn-square" href="/add_to_cart/{{hot.slug}}"><i class="fa fa-shopping-cart"></i></a>
                             <a class="btn btn-outline-dark btn-square" href="/add_to_wishlist/{{hot.slug}}"><i class="far fa-heart"></i></a>
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                            <a class="btn btn-outline-dark btn-square" href="/ProductView/{{hot.slug}}"><i class="fa fa-search"></i></a>
                         </div>
                     </div>
                     <div class="text-center py-4">
@@ -202,7 +202,7 @@
                             <a class="btn btn-outline-dark btn-square" href="/add_to_cart/{{new.slug}}"><i class="fa fa-shopping-cart"></i></a>
                             <a class="btn btn-outline-dark btn-square" href="/add_to_wishlist/{{new.slug}}"><i class="far fa-heart"></i></a>
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                            <a class="btn btn-outline-dark btn-square" href="/ProductView/{{new.slug}}"><i class="fa fa-search"></i></a>
                         </div>
                     </div>
                     <div class="text-center py-4">

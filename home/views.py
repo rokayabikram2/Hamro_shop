@@ -10,6 +10,7 @@ from django.contrib.auth.models import User
 class BaseView(View):
     views = {}
     views['categories'] = Category.objects.all()
+    views['sale_products'] = Product.objects.filter(labels='sale')
 
 
 class HomeView(BaseView):
@@ -52,8 +53,8 @@ class ProductView(BaseView):
         self.views['wish_counts'] = count_wish(request)
         self.views['product_detail'] = Product.objects.filter(slug=slug)
         self.views['product_review'] = ProductReview.objects.filter(slug=slug)
-        subcat_id = Product.objects.get(slug = slug).subcategory_id
-        products_id = Product.objects.get(slug = slug).id
+        subcat_id = Product.objects.get(slug=slug).subcategory_id
+        products_id = Product.objects.get(slug=slug).id
         self.views['product_Image'] = ProductImage.objects.filter(product_id=products_id)
         self.views['related_product'] = Product.objects.filter(subcategory_id=subcat_id)
 
@@ -257,3 +258,36 @@ def signup(request):
         else:
             messages.error(request, 'The password does not match.')
     return render(request, 'signup.html')
+
+
+def checkoutView(request):
+    if request.method == "POST":
+        first_name = request.POST['f_name']
+        last_name = request.POST['l_name']
+        email = request.POST['email']
+        mobile = request.POST['mobile']
+        address1 = request.POST['address1']
+        address2 = request.POST['address2']
+        country = request.POST['country']
+        pin_code = request.POST['code']
+        cart = request.POST['cart']
+        username= User.objects.get(pk=id)
+
+        print(address1,mobile,pin_code,cart)
+        for i in cart:
+            print(i)
+            cart = cart(
+                username=username,
+                product=cart[i]['name'],
+                price=cart[i]['price'],
+                quantity=cart[i]['quantity'],
+                address1=address1,
+                mobile=mobile,
+                pin_code=pin_code
+
+
+            )
+            cart.save()
+            return redirect('/')
+
+    return render(request,'checkout.html')
