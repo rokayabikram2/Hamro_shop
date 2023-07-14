@@ -138,7 +138,30 @@ class Wishlist(models.Model):
         return self.username
 
 
+orderstatuses = (('Pending', 'Pending'), ('Out for Shipping','Out for Shipping'), ('Completed','Completed'))
 
+
+class Order(models.Model):
+    username = models.CharField(max_length = 300, null= False)
+    fname = models.CharField(max_length = 300, null= False)
+    lname = models.CharField(max_length = 300, null= False)
+    email = models.EmailField(max_length = 300, null= False)
+    phone = models.CharField(max_length = 300, null= False)
+    address = models.TextField(null= False)
+    city = models.CharField(max_length = 300, null= False)
+    state = models.CharField(max_length = 300, null= False)
+    country = models.CharField(max_length = 300, null= False)
+    pincode = models.CharField(max_length = 300, null= False)
+    total_price  = models.FloatField(null = False)
+    payment_mode = models.CharField(max_length = 300, null= False)
+    payment_id = models.CharField(max_length = 300, null= True)
+    status = models.CharField(max_length = 300, null= False, choices=orderstatuses, default= 'Pending')
+    message = models.TextField(null = True)
+    created_at = models.DateTimeField(auto_now_add=False)
+    updated_at = models.DateTimeField(auto_now =True, auto_now_add=False)
+
+    def str(self):
+        return '{} - {}'.format(self.id)
 
 
 

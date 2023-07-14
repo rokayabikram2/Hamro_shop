@@ -11,6 +11,7 @@ class BaseView(View):
     views = {}
     views['categories'] = Category.objects.all()
     views['sale_products'] = Product.objects.filter(labels='sale')
+    views['information'] = Information.objects.all()
 
 
 class HomeView(BaseView):
@@ -260,34 +261,36 @@ def signup(request):
     return render(request, 'signup.html')
 
 
-def checkoutView(request):
-    if request.method == "POST":
-        first_name = request.POST['f_name']
-        last_name = request.POST['l_name']
-        email = request.POST['email']
-        mobile = request.POST['mobile']
-        address1 = request.POST['address1']
-        address2 = request.POST['address2']
-        country = request.POST['country']
-        pin_code = request.POST['code']
-        cart = request.POST['cart']
-        username= User.objects.get(pk=id)
+class CheckoutView(BaseView):
+    def get(self, request):
+        self.views["wish_counts"] = count_wish(request)
+        self.views["cart_counts"] = count_cart(request)
+        username = request.user.username
+        self.views['orders'] = Cart.objects.filter(username=username)
+        s = 0
+        for i in self.views["orders"]:
+            s = s + i.total
+        self.views["sub_total"] = s
+        self.views['delivery_charge'] = 100
+        self.views['grand_total'] = s+100
 
-        print(address1,mobile,pin_code,cart)
-        for i in cart:
-            print(i)
-            cart = cart(
-                username=username,
-                product=cart[i]['name'],
-                price=cart[i]['price'],
-                quantity=cart[i]['quantity'],
-                address1=address1,
-                mobile=mobile,
-                pin_code=pin_code
+        return render(request, 'checkout.html', self.views)
 
+    def placeorder(request):
+        if request.method == 'POST':
+            neworder = Order()
+            neworder.fname = request.POST['fname']
+            neworder.lname = request.POST['lname']
+            neworder.email = request.POST['email']
+            neworder.phone = request.POST['phone']
+            neworder.address = request.POST['address']
+            neworder.city = request.POST['city']
+            neworder.state = request.POST['state']
+            neworder.country = request.POST['country']
+            neworder.pincode = request.POST['pincode']
 
-            )
-            cart.save()
-            return redirect('/')
+            neworder.payment_mode = request.POST['payment_mode']
 
-    return render(request,'checkout.html')
+            Cart.objects.filter(username = request.user.username).delete()
+            messages.success(request, "Your order has been placed successfully")
+        return redirect('/')
